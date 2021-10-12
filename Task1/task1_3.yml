@@ -1,0 +1,13 @@
+- name: task1_3
+  hosts: node1.example.com
+
+  tasks:
+  - name: Edit grub file
+    lineinfile:
+      path: /etc/default/grub
+      state: present
+      regexp: 'GRUB_CMDLINE_LINUX="'
+      line: 'GRUB_CMDLINE_LINUX="no_timer_check console=tty0 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 elevator=noop"'
+  - name: Run grub2-mkconfig
+    shell:
+      cmd: grub2-mkconfig    
