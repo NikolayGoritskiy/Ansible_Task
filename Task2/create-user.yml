@@ -1,0 +1,28 @@
+- name: create a users
+  hosts: node1.example.com
+  vars_files:
+    - group_vars/users
+    - secret.yml
+  tasks:
+    - name: creating user1
+      user:
+        name: "{{ username1 }}"
+        password: "{{ pwhash1 }}"
+        comment: "{{ username1 }}@example.com"
+        home: /home/user_ansible/{{ username1 }}
+
+    - name: creating user2
+      user:
+        name: "{{ username2 }}"
+        password: "{{ pwhash2 }}"
+        comment: "{{ username2 }}@example.com"
+        home: /home/user_ansible/{{ username2 }}
+
+    - name: creating user2
+      user:
+        name: "{{ username3 }}"
+        password: "{{ pwhash3 }}"
+        comment: "{{ username3 }}@example.com"
+        home: /home/user_ansible/{{ username3 }}
+
+
