@@ -1,0 +1,17 @@
+- name: Install web server
+  yum:
+    name: "{{ Web_server_name }}"
+    state: present
+
+- name: Creating a file with content in j2 template
+  template:
+    src: templates/index.j2
+    dest: /var/www/html/index.html
+  notify:
+  - Restart web
+
+- name: permit traffic in default zone for https service
+  ansible.posix.firewalld:
+    service: http
+    permanent: yes
+    state: enabled
