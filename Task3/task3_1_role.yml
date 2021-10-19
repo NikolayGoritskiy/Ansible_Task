@@ -1,0 +1,5 @@
+- name: use httpd role playbook
+  hosts: node2.example.com
+
+  roles:
+    - role: 001_httpd
