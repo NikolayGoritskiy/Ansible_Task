@@ -1,0 +1,8 @@
+anonymous_enable: "YES"
+local_enable: "YES"
+write_enable: "YES"
+anon_upload_enable: "YES"
+anon_default_directory: /var/ftp/pub
+anon_upload_directory: /var/ftp/pub/upload
+listen: "YES"
+anon_mkdir_write_enable: "YES"

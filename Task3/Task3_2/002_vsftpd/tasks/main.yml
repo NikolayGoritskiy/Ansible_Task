@@ -1,0 +1,36 @@
+- name: Install vsftpd
+  yum:
+    name: vsftpd
+    state: present
+
+- name: Creating a config file with j2 template
+  template:
+    src: templates/vsftpd.j2
+    dest: /etc/vsftpd/vsftpd.conf
+  notify:
+  - Restart service
+
+- name: permit traffic in default zone for FTP service
+  ansible.posix.firewalld:
+    port: 20-21/tcp
+    permanent: yes
+    state: enabled
+
+- name: Permissions in directory FTP for anon users
+  file:
+    path: "{{ anon_default_directory }}"
+    state: directory
+    recurse: yes
+    mode: "775"
+
+- name: FTP directory permissions for anonymous users upload folder
+  file:
+    path: "{{ anon_upload_directory }}"
+    state: directory
+    recurse: yes
+    mode: "777"
+
+- name: Edit SELinux context
+  shell:
+    cmd: setsebool ftpd_anon_write on && setsebool -P ftpd_full_access 1
+

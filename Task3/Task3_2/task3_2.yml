@@ -1,0 +1,5 @@
+- name: use vsftpd role playbook
+  hosts: node1.example.com
+
+  roles:
+    - role: 002_vsftpd
